@@ -1,39 +1,111 @@
 # AlphaHang
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/alpha_hang`. To experiment with that code, run `bin/console` for an interactive prompt.
+A Ruby-based AI against Hangman.
 
-TODO: Delete this and the text above, and describe your gem
+## Specification
 
-## Installation
++ *AlphaHang::Client* is an API client, starting game, making a guess, etc.
++ *AlphaHang::Brain* is the strategy maker.
++ *AlphaHang::AI* is the AI, leveraging both client and brain to fight against Hangman server.
 
-Add this line to your application's Gemfile:
+## AI
+
+Initialization
 
 ```ruby
-gem 'alpha_hang'
+ai = AlphaHang::AI.new # Auto configures client and brain
 ```
 
-And then execute:
+Work
 
-    $ bundle
+```ruby
+ai.start
+```
 
-Or install it yourself as:
+## Client
 
-    $ gem install alpha_hang
+Initialization
 
-## Usage
+```ruby
+client = AlphaHang::Client.new do |config|
+  config.request_url = ENV['REQUEST_URL']
+  config.player_id   = ENV['PLAYER_ID']
+end
+```
 
-TODO: Write usage instructions here
+API
 
-## Development
+```ruby
+client.start_game
+client.next_word
+client.guess_word('P')
+client.get_result
+client.submit_result
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+## Brain
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+The decision maker, based on three known conditions:
 
-## Contributing
++ Length of word
++ Letters not in word
++ Letters in word and their positions
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/alpha_hang. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Initialization
 
+```ruby
+dict = '/usr/share/dict/words'
+brain = AlphaHang::Brain.new(dict: dict, length: 5)
+
+brain.query('*****') # => 'e'
+brain.query('*e**o') # => 'h'
+```
+
+**Strategy underground**
+
+Suppose we are guessing `'hello'`. After serveral guesses, we got `'*e**o'` confirmed, and `'abc'` exclueded. Now there are 10 words located in our dictionary:
+
+```
+'cello'
+'cento'
+'gecko'
+'hello'
+'lento'
+'mezzo'
+'negro'
+'recco'
+'serio'
+'sexto'
+```
+
+*What should we guess now?*
+
+First, we'll scan each `'*'` position, sort by occurences
+
+```
+position 0 | c - 2 |   position 2 | c - 2 |  position 3 | t - 3 |
+           | s - 2 |              | l - 2 |             | l - 2 |
+           | g - 1 |              | n - 2 |             | c - 1 |
+           | h - 1 |              | g - 1 |             | i - 1 |
+           | l - 1 |              | r - 1 |             | k - 1 |
+           | m - 1 |              | x - 1 |             | r - 1 |
+           | n - 1 |              | z - 1 |             | z - 1 |
+           | r - 1
+```
+
+Second, filter the exclusion
+
+```
+position 0 | s - 2 |   position 2 | l - 2 |  position 3 | t - 3 |
+           | g - 1 |              | n - 2 |             | l - 2 |
+           | h - 1 |              | g - 1 |             | i - 1 |
+           | l - 1 |              | r - 1 |             | k - 1 |
+           | m - 1 |              | x - 1 |             | r - 1 |
+           | n - 1 |              | z - 1 |             | z - 1 |
+           | r - 1 |
+```
+
+Third, return the letter has the most occurences, `'t'`. If not fitted, try the second occurenced letter, `'l'`.
 
 ## License
 
