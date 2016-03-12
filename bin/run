@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "alpha_hang"
+
+ai = AlphaHang::AI.new
+
+ai.start
+
