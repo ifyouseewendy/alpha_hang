@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://strikingly-hangman.herokuapp.com/game/on
+    body:
+      encoding: UTF-8
+      string: '{"sessionId":"0898e5bc1aa821d910e219abd75fbd67","action":"getResult"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Date:
+      - Sat, 12 Mar 2016 09:36:41 GMT
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - '"d81840df4b0c54e1f27bc0b20ef4f902"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7fd979c5-9047-4c4c-8640-cd20bb23417a
+      X-Runtime:
+      - '0.016977'
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"sessionId":"0898e5bc1aa821d910e219abd75fbd67","data":{"totalWordCount":1,"correctWordCount":0,"totalWrongGuessCount":1,"score":-1}}'
+    http_version: 
+  recorded_at: Sat, 12 Mar 2016 09:36:41 GMT
+recorded_with: VCR 3.0.1

@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://strikingly-hangman.herokuapp.com/game/on
+    body:
+      encoding: UTF-8
+      string: '{"sessionId":"0898e5bc1aa821d910e219abd75fbd67","action":"guessWord","guess":"P"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Date:
+      - Sat, 12 Mar 2016 09:36:34 GMT
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - '"7d2ccdaa370329802d1b7af99387a145"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - da3b6c3c-d0ef-42dc-8bb6-64fec8d3991f
+      X-Runtime:
+      - '0.034507'
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"sessionId":"0898e5bc1aa821d910e219abd75fbd67","data":{"word":"*****","totalWordCount":1,"wrongGuessCountOfCurrentWord":1}}'
+    http_version: 
+  recorded_at: Sat, 12 Mar 2016 09:36:33 GMT
+recorded_with: VCR 3.0.1

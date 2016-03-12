@@ -12,11 +12,12 @@ class ClientTest < Minitest::Test
 
   def test_start_game
     VCR.use_cassette("test_start_game") do
-      response = client.start_game
+      assert_silent do
+        response = client.start_game
 
-      assert_instance_of Hash, response
-      assert_instance_of String, response[:sessionId]
-      assert response.has_key?(:data)
+        assert_instance_of String, response[:sessionId]
+        assert response.has_key?(:data)
+      end
     end
   end
 
@@ -27,8 +28,7 @@ class ClientTest < Minitest::Test
       VCR.use_cassette("test_next_word") do
         response = client.next_word
 
-        assert_instance_of Hash, response
-        assert_instance_of client.session_id, response[:sessionId]
+        assert_equal client.session_id, response[:sessionId]
         assert response.has_key?(:data)
       end
     end
@@ -44,8 +44,7 @@ class ClientTest < Minitest::Test
         VCR.use_cassette("test_guess_word") do
           response = client.guess_word('P')
 
-          assert_instance_of Hash, response
-          assert_instance_of client.session_id, response[:sessionId]
+          assert_equal client.session_id, response[:sessionId]
           assert response.has_key?(:data)
         end
       end
@@ -62,9 +61,8 @@ class ClientTest < Minitest::Test
         VCR.use_cassette("test_get_result") do
           response = client.get_result
 
-          assert_instance_of Hash, response
-          assert_instance_of client.session_id, response[:sessionId]
-          assert response.has_key?(:data)
+          assert_equal client.session_id, response[:sessionId]
+          assert response[:data].has_key?(:score)
         end
       end
     end
@@ -77,11 +75,11 @@ class ClientTest < Minitest::Test
       VCR.use_cassette("test_next_word") do
         client.next_word
 
-        VCR.use_cassette("test_get_result") do
+        VCR.use_cassette("test_submit_result") do
           response = client.submit_result
 
-          assert_instance_of Hash, response
-          assert_instance_of client.session_id, response[:sessionId]
+          assert_equal 'GAME OVER', response[:message]
+          assert_equal client.session_id, response[:sessionId]
           assert response.has_key?(:data)
         end
       end
