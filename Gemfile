@@ -12,3 +12,5 @@ gem 'minitest-focus'
 gem 'pry-byebug'
 gem 'pry-rescue'
 gem 'pry-stack_explorer'
+
+gem 'terminal-table'

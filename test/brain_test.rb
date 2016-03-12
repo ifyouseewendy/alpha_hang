@@ -75,33 +75,6 @@ class BrainTest < Minitest::Test
     # BINGO!
   end
 
-  def test_work_flow
-    times = 0
-
-    word   = 'HELLO'
-    guess  = word.tr('a-zA-Z', '*')
-
-    loop do
-      break if guess == word
-
-      letter = brain.query(guess)
-
-      unless word.index(letter)
-        brain.exclude(letter)
-      else
-        word.chars.each_with_index do |char, idx|
-          guess[idx] = letter if char == letter
-        end
-
-        brain.confirm(guess)
-      end
-
-      times += 1
-    end
-
-    puts "-- times: #{times}"
-  end
-
   def test_word_length_less_than_5
     skip
   end
