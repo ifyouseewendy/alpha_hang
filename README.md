@@ -55,7 +55,7 @@ Initialization
 
 ```ruby
 dict = '/usr/share/dict/words'
-brain = AlphaHang::Brain.new(dict: dict, length: 5)
+brain = AlphaHang::Brain.new(dict: dict)
 
 brain.query('*****') # => 'e'
 brain.query('*e**o') # => 'h'
