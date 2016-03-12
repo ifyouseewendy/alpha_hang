@@ -14,3 +14,5 @@ gem 'pry-rescue'
 gem 'pry-stack_explorer'
 
 gem 'terminal-table'
+
+gem 'dotenv'
