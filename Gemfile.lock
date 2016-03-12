@@ -1,0 +1,65 @@
+PATH
+  remote: .
+  specs:
+    alpha_hang (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.4.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
+    byebug (8.2.2)
+    coderay (1.1.1)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
+    debug_inspector (0.0.2)
+    dotenv (2.1.0)
+    hashdiff (0.3.0)
+    interception (0.5)
+    method_source (0.8.2)
+    minitest (5.8.4)
+    minitest-focus (1.1.2)
+      minitest (>= 4, < 6)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.3.0)
+      byebug (~> 8.0)
+      pry (~> 0.10)
+    pry-rescue (1.4.2)
+      interception (>= 0.5)
+      pry
+    pry-stack_explorer (0.4.9.2)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
+    rake (10.5.0)
+    safe_yaml (1.0.4)
+    slop (3.6.0)
+    terminal-table (1.5.2)
+    vcr (3.0.1)
+    webmock (1.24.2)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  alpha_hang!
+  bundler (~> 1.10)
+  dotenv
+  minitest (~> 5.0)
+  minitest-focus
+  pry-byebug
+  pry-rescue
+  pry-stack_explorer
+  rake (~> 10.0)
+  terminal-table
+  vcr
+  webmock
+
+BUNDLED WITH
+   1.11.2
