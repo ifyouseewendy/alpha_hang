@@ -2,6 +2,12 @@
 
 A Ruby-based AI against Hangman.
 
+## Usage
+
+```ruby
+bin/run
+```
+
 ## Specification
 
 + *AlphaHang::Client* is an API client, starting game, making a guess, etc.
@@ -10,15 +16,19 @@ A Ruby-based AI against Hangman.
 
 ## AI
 
-Initialization
+To make AI utilizes client and brain, there is a need to pass some ENV variables. I use `dotenv` in development.
 
-```ruby
-ai = AlphaHang::AI.new # Auto configures client and brain
+```
+# .env
+REQUEST_URL={YOUR_REUQEST_URL}
+PLAYER_ID={YOUR_PLAYER_ID}
+DICT={DIC_FILE_PATH} # already pack a dict file in resources/words
 ```
 
-Work
+Start to play
 
 ```ruby
+ai = AlphaHang::AI.new
 ai.start
 ```
 
@@ -45,12 +55,6 @@ client.submit_result
 
 ## Brain
 
-The decision maker, based on three known conditions:
-
-+ Length of word
-+ Letters not in word
-+ Letters in word and their positions
-
 Initialization
 
 ```ruby
@@ -62,6 +66,14 @@ brain.query('*e**o') # => 'h'
 ```
 
 **Strategy underground**
+
+Brain is working based on three known conditions:
+
++ Length of word
++ Letters not in word
++ Letters in word and their positions
+
+Find the letter which has most frequencies in all '*' positions.
 
 Suppose we are guessing `'hello'`. After serveral guesses, we got `'*e**o'` confirmed, and `'abc'` exclueded. Now there are 10 words located in our dictionary:
 
