@@ -17,9 +17,9 @@ module AlphaHang
     end
 
     def confirm(guess)
-      self.data_set   = get_candidates_from(guess)
-      self.choices    = []
-      self.exclusions = guess.chars
+      self.data_set     = get_candidates_from(guess)
+      self.choices      = []
+      self.exclusions  += guess.chars.map(&:upcase).delete_if{|c| c == '*'}
     end
 
     def exclude(char)
