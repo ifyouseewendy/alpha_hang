@@ -4,8 +4,7 @@ class BrainTest < Minitest::Test
   attr_reader :brain
 
   def setup
-    dict   = File.expand_path('../../resources/words', __FILE__)
-    @brain = AlphaHang::Brain.new(dict)
+    @brain = AlphaHang::Brain.new(ENV['DICT'])
   end
 
   def test_that_it_has_a_version_number
