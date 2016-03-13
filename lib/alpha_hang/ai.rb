@@ -25,6 +25,8 @@ module AlphaHang
         puts "--> Round ##{idx}"
         play_a_round
       end
+
+      puts client.submit_result
     end
 
     private
