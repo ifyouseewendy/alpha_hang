@@ -26,7 +26,11 @@ module AlphaHang
         play_a_round
       end
 
-      puts client.submit_result
+      info[:score]
+    end
+
+    def submit
+      client.submit_result
     end
 
     private
@@ -77,12 +81,14 @@ module AlphaHang
             end
           rescue => e
             puts "--> Retried when guessing word: #{e.message}"
-            require'pry';binding.pry
             retry
           end
         end
 
-        puts client.get_result[:data]
+        data = client.get_result[:data]
+        self.info[:score] = data[:score]
+
+        puts data
       end
 
       def fetch_word
@@ -92,7 +98,6 @@ module AlphaHang
           word = resp[:data][:word]
         rescue => e
           puts "--> Retried when fetching next_word: #{e.message}"
-          require'pry';binding.pry
           retry
         end
 

@@ -5,5 +5,12 @@ require "alpha_hang"
 
 ai = AlphaHang::AI.new
 
-ai.start
+score = ai.start
+
+current_score = ARGV[0].to_i
+
+if score > current_score
+  puts "--> Submit Result"
+  puts ai.submit
+end
 
