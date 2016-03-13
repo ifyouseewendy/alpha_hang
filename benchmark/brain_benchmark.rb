@@ -6,19 +6,28 @@ require File.expand_path('../../lib/alpha_hang', __FILE__)
 def print(result)
   data = result.sort_by{|ar| ar[1]}
 
-  table = Terminal::Table.new :headings => ['Word', 'Length', 'Query Count'], :rows => data
-  puts table
+  total_wronged = data.map{|ar| ar[2]}.reduce(:+)
+  total_tried   = data.map{|ar| ar[3]}.reduce(:+)
+  total_rate    = "%s %" % (total_wronged*100.0/total_tried).round(1)
 
-  avg_count = (data.map(&:last).reduce(:+).to_f / data.count).round(1)
-  puts "--> Avg: #{avg_count}"
+  avg_wronged = (total_wronged.to_f/data.count).round(1)
+  avg_tried   = (total_tried.to_f/data.count).round(1)
+
+  data << :separator
+  data << [nil, nil, avg_wronged, avg_tried, total_rate]
+
+  table = Terminal::Table.new :headings => ['Word', 'Length', 'Wrong', 'Tried', 'Rate'], :rows => data
+  puts table
 end
 
 def guess(brain, word)
   brain.clear!
   word.upcase!
 
-  count = 0
   guess  = word.tr('a-zA-Z', '*')
+
+  tried = 0
+  wronged = 0
 
   loop do
     break if guess == word
@@ -27,6 +36,7 @@ def guess(brain, word)
 
     unless word.index(letter)
       brain.exclude(letter)
+      wronged += 1
     else
       word.chars.each_with_index do |char, idx|
         guess[idx] = letter if char == letter
@@ -35,10 +45,10 @@ def guess(brain, word)
       brain.confirm(guess)
     end
 
-    count += 1
+    tried += 1
   end
 
-  count
+  [wronged, tried]
 end
 
 words  = DATA.read.split
@@ -48,9 +58,10 @@ dict  = File.expand_path('../../resources/words', __FILE__)
 brain = AlphaHang::Brain.new(dict)
 
 words.each do |word|
-  count = guess(brain, word)
+  wronged, tried = guess(brain, word)
+  rate = "%s %" % (wronged*100.0/tried).round(1)
 
-  result << [word, word.length, count]
+  result << [word, word.length, wronged, tried, rate]
 end
 
 print(result)

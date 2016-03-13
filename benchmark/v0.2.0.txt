@@ -1,0 +1,56 @@
++-------------------------+--------+-------+-------+--------+
+| Word                    | Length | Wrong | Tried | Rate   |
++-------------------------+--------+-------+-------+--------+
+| CAPE                    | 4      | 8     | 12    | 66.7 % |
+| KNOCK                   | 5      | 7     | 11    | 63.6 % |
+| DEINO                   | 5      | 5     | 10    | 50.0 % |
+| JOWEL                   | 5      | 5     | 10    | 50.0 % |
+| AVESTA                  | 6      | 11    | 16    | 68.8 % |
+| ABASGI                  | 6      | 3     | 8     | 37.5 % |
+| FURLAN                  | 6      | 7     | 13    | 53.8 % |
+| WITBOOI                 | 7      | 3     | 8     | 37.5 % |
+| BELCHER                 | 7      | 3     | 9     | 33.3 % |
+| BENTING                 | 7      | 3     | 9     | 33.3 % |
+| LAVACRE                 | 7      | 2     | 8     | 25.0 % |
+| CROCHET                 | 7      | 1     | 7     | 14.3 % |
+| GAUDLESS                | 8      | 5     | 12    | 41.7 % |
+| FOREDECK                | 8      | 4     | 11    | 36.4 % |
+| OVERCAPE                | 8      | 1     | 8     | 12.5 % |
+| WOODRUFF                | 8      | 4     | 10    | 40.0 % |
+| TECHNISM                | 8      | 2     | 10    | 20.0 % |
+| ENARCHED                | 8      | 1     | 8     | 12.5 % |
+| CAUDICES                | 8      | 2     | 9     | 22.2 % |
+| BARGOOSE                | 8      | 5     | 12    | 41.7 % |
+| REGENTESS               | 9      | 0     | 6     | 0.0 %  |
+| SPONGIOSE               | 9      | 4     | 11    | 36.4 % |
+| IMMENSIVE               | 9      | 1     | 7     | 14.3 % |
+| IMPUTABLE               | 9      | 2     | 11    | 18.2 % |
+| SEMESTRAL               | 9      | 0     | 7     | 0.0 %  |
+| DEMIRACLE               | 9      | 1     | 9     | 11.1 % |
+| GROUSEWARD              | 10     | 0     | 9     | 0.0 %  |
+| ZENITHWARD              | 10     | 1     | 11    | 9.1 %  |
+| TOPSAILITE              | 10     | 1     | 9     | 11.1 % |
+| VOCIFEROUS              | 10     | 1     | 10    | 10.0 % |
+| TOPESTHESIA             | 11     | 3     | 11    | 27.3 % |
+| NOUMENALIST             | 11     | 1     | 11    | 9.1 %  |
+| COLLECTEDLY             | 11     | 1     | 8     | 12.5 % |
+| LIMITEDNESS             | 11     | 2     | 10    | 20.0 % |
+| UNSHIVERING             | 11     | 1     | 10    | 10.0 % |
+| COARBITRATOR            | 12     | 2     | 9     | 22.2 % |
+| CATHETOMETER            | 12     | 0     | 8     | 0.0 %  |
+| PALAEONISCUS            | 12     | 1     | 11    | 9.1 %  |
+| INTERVERSION            | 12     | 0     | 8     | 0.0 %  |
+| FOUNDATIONER            | 12     | 0     | 10    | 0.0 %  |
+| MERRYTHOUGHT            | 12     | 1     | 10    | 10.0 % |
+| SEMIBARBAROUS           | 13     | 0     | 9     | 0.0 %  |
+| UNPOLEMICALLY           | 13     | 0     | 11    | 0.0 %  |
+| MICROCOSMICAL           | 13     | 1     | 9     | 11.1 % |
+| PRESETTLEMENT           | 13     | 0     | 8     | 0.0 %  |
+| EXPRESSIVENESS          | 14     | 0     | 8     | 0.0 %  |
+| ANTIPATRIARCHAL         | 15     | 0     | 9     | 0.0 %  |
+| COMMISSIONERSHIP        | 16     | 0     | 10    | 0.0 %  |
+| PYRAMIDOATTENUATE       | 17     | 0     | 12    | 0.0 %  |
+| MACRACANTHRORHYNCHIASIS | 23     | 0     | 11    | 0.0 %  |
++-------------------------+--------+-------+-------+--------+
+|                         |        | 2.1   | 9.7   | 21.9 % |
++-------------------------+--------+-------+-------+--------+
