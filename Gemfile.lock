@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    alpha_hang (0.2.0)
+    alpha_hang (1.0.0)
       activesupport (~> 4.2)
       httparty (~> 0.13)
 

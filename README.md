@@ -8,21 +8,21 @@ A Ruby-based AI against Hangman.
 bin/run
 ```
 
-## Specification
+### Specification
 
 + *AlphaHang::Client* is an API client, starting game, making a guess, etc.
-+ *AlphaHang::Brain* is the strategy maker.
-+ *AlphaHang::AI* is the AI, leveraging both client and brain to fight against Hangman server.
++ *AlphaHang::Brain* is a strategy maker.
++ *AlphaHang::AI* is an AI, leveraging both client and brain to fight against Hangman server.
 
-## AI
+### AI
 
-To make AI utilizes client and brain, there is a need to pass some ENV variables. I use `dotenv` in development. (Note, I've already packed a dict file in resources/words, from [dwyl/english-words](https://github.com/dwyl/english-words))
+To make AI utilizes client and brain, there is a need to pass some ENV variables. I use `dotenv` in development. (I've already packed a dict file in resources/words, from [dwyl/english-words](https://github.com/dwyl/english-words))
 
 ```
 # .env
 REQUEST_URL={YOUR_REUQEST_URL}
 PLAYER_ID={YOUR_PLAYER_ID}
-DICT={DIC_FILE_PATH}
+DICT={DICT_FILE_PATH}
 ```
 
 Start to play
@@ -32,7 +32,7 @@ ai = AlphaHang::AI.new
 ai.start
 ```
 
-## Client
+### Client
 
 Initialization
 
@@ -53,7 +53,7 @@ client.get_result
 client.submit_result
 ```
 
-## Brain
+### Brain
 
 Initialization
 
@@ -74,6 +74,36 @@ Brain is working based on three known conditions:
 + Letters in word and their positions
 
 ![brain](/resources/brain.png)
+
+## Changelog
+
+*v0.2.0*
+
++ Set up code structure
++ Set up workflow
+
+```
+{
+  "totalWordCount"=>80,
+  "correctWordCount"=>45,
+  "totalWrongGuessCount"=>247,
+  "score"=>653
+}
+```
+
+*v1.0.0*
+
++ Optimize brain strategy and workflow
++ Use a bigger dictionary
+
+```
+{
+  "totalWordCount"=>80,
+  "correctWordCount"=>77,
+  "totalWrongGuessCount"=>203,
+  "score"=>1337
+}
+```
 
 ## License
 
