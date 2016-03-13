@@ -16,13 +16,13 @@ bin/run
 
 ## AI
 
-To make AI utilizes client and brain, there is a need to pass some ENV variables. I use `dotenv` in development.
+To make AI utilizes client and brain, there is a need to pass some ENV variables. I use `dotenv` in development. (Note, I've already packed a dict file in resources/words, from [dwyl/english-words](https://github.com/dwyl/english-words))
 
 ```
 # .env
 REQUEST_URL={YOUR_REUQEST_URL}
 PLAYER_ID={YOUR_PLAYER_ID}
-DICT={DIC_FILE_PATH} # already pack a dict file in resources/words
+DICT={DIC_FILE_PATH}
 ```
 
 Start to play
