@@ -11,50 +11,65 @@ module AlphaHang
 
     def query(guess)
       set_word_length(guess.length) if word_length.nil?
-      make_choices_from(guess) if choices.empty?
 
-      choices.first
+      yield_letter(guess)
     end
 
     def confirm(guess)
-      self.data_set     = get_candidates_from(guess)
-      self.choices      = []
-      self.exclusions  += guess.chars.map(&:upcase).delete_if{|c| c == '*'}
+      filter_by_matching!(guess)
     end
 
     def exclude(char)
-      self.exclusions << char
-      self.choices = choices - exclusions
+      filter_by_exclusion!(char)
     end
 
     def clear!
       set_word_length(nil)
-      @choices     = []
-      @exclusions  = []
     end
 
     private
 
       def set_word_length(length)
         @word_length = length
-        @data_set    = filter_dictionary_by_length
+        @data_set    = filter_by_length
       end
 
-      def filter_dictionary_by_length
+      def filter_by_length
         return dictionary if word_length.nil?
 
         dictionary.select{|word| word.length == word_length}.map(&:upcase).uniq
       end
 
-      def make_choices_from(guess)
-        candidates   = get_candidates_from(guess)
-        positions    = find_star_postions_from(guess)
-        self.choices = make_analysis_on(candidates, positions)
+      def yield_letter(guess)
+        positions = find_star_postions_from(guess)
+        choices   = make_analysis_on(positions)
+        choices.first
       end
 
-      def get_candidates_from(guess)
-        regexp = make_regexp(guess)
-        data_set.select{|word| word =~ regexp}
+      def filter_by_exclusion!(char)
+        ch = char.upcase
+        self.data_set = data_set.reject{|word| word.index(ch) }
+      end
+
+      def filter_by_matching!(guess)
+        chars   = guess.upcase.chars
+        charset = chars.reject{|c| c == '*'}.uniq
+
+        self.data_set = data_set.select do |word|
+          flag = true
+
+          word.chars.each_with_index do |char, idx|
+            if '*' == chars[idx]
+              flag = false if charset.include?(char)
+            else
+              flag = false unless char == chars[idx]
+            end
+
+            break unless flag
+          end
+
+          flag
+        end
       end
 
       def find_star_postions_from(str)
@@ -63,23 +78,19 @@ module AlphaHang
         end
       end
 
-      def make_regexp(str)
-        Regexp.new str.gsub('*', '.').upcase
-      end
-
-      def make_analysis_on(words, positions)
+      def make_analysis_on(positions)
         hash = Hash.new(0)
 
-        words.each do |word|
+        self.data_set.each do |word|
           word.chars.each_with_index do |char, idx|
-            next if exclusions.include?(char) or !(positions.include? idx)
-
-            hash[char] += 1
+            hash[char] += 1 if positions.include? idx
           end
         end
 
         # Sort by frequency first, then alphabetic
-        hash.sort{|a,b| a[1] == b[1] ? a[0] <=> b[0] : b[1] <=> a[1]}.map(&:first)
+        hash\
+          .sort{|a,b| a[1] == b[1] ? a[0] <=> b[0] : b[1] <=> a[1]}
+          .map(&:first)
       end
 
   end

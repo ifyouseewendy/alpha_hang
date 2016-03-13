@@ -27,12 +27,22 @@ class BrainTest < Minitest::Test
     #   "U" => 20,
     #   ...
 
-    assert_equal  'A', brain.query(guess)
-    brain.exclude 'A'
-
-    # Set word_length and filter data_set after first query
+    # Filter data set by word length after first query
+    assert_equal 'A', brain.query(guess)
     assert_equal 2,   brain.word_length
     assert_equal 139, brain.data_set.count
+
+    # Filter data set by excluding letter
+    brain.exclude 'A'
+    assert_equal 104, brain.data_set.count
+
+    # Frequency
+    #
+    # {
+    #   "O" => 30,
+    #   "E" => 25,
+    #   "I" => 20,
+    #   "U" => 20,
 
     assert_equal  'O', brain.query(guess)
     brain.exclude 'O'
@@ -40,18 +50,20 @@ class BrainTest < Minitest::Test
     assert_equal  'E', brain.query(guess)
     brain.exclude 'E'
 
+    assert_equal  'U', brain.query(guess)
+    brain.exclude 'U'
+
     assert_equal  'I', brain.query(guess)
 
     guess = '*i'
     brain.confirm(guess)
 
     # Reduce data_set after confirmation
-    assert_equal 14, brain.data_set.count
+    assert_equal 13, brain.data_set.count
 
     # Frequency
     #
     # {
-    #   "A" => 1, # exclude
     #   "D" => 1,
     #   "F" => 1,
     #   "G" => 1,
@@ -72,21 +84,5 @@ class BrainTest < Minitest::Test
     brain.confirm(guess)
 
     # BINGO!
-  end
-
-  def test_word_length_less_than_5
-    skip
-  end
-
-  def test_word_length_less_than_8
-    skip
-  end
-
-  def test_word_length_less_than_12
-    skip
-  end
-
-  def test_word_length_more_than_12
-    skip
   end
 end
